@@ -99,3 +99,15 @@ class CocotbBridge:
                         )
                 else:
                     self.compile_args.extend(option.split())
+    
+    def set_vlogparam(self, name, value):
+        # Remove any pre-existing definition
+        self.compile_args = [x for x in self.compile_args if f'-G{name}=' not in x]
+        # Append the compile_arg
+        self.compile_args.append(f'-G{name}="{value}"')
+
+    def set_vlogdefine(self, name, value):
+        # Remove any pre-existing definition
+        self.compile_args = [x for x in self.compile_args if f'-D{name}=' not in x]
+        # Append the compile_arg
+        self.compile_args.append(f'-D{name}="{value}"')
